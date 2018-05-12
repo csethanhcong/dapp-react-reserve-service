@@ -72,23 +72,26 @@
 
 #### 3. Writing SCC
 
-- **ERC721.sol**: All required methods and events are declared here since we will use ERC721 as _token standard_ for our app. Imagine its an interface for this standard we will implement further
+- **ERC20.sol**: All required methods and events are declared here since we will use ERC721 as _token standard_ for our app. Imagine its an interface for this standard we will implement further
 
   ```
-  pragma solidity ^0.4.2;
+  pragma solidity ^0.4.21;
 
-  contract ERC721 {
-    // Required methods
-    function totalSupply() public view returns (uint256 total);
-    function balanceOf(address _owner) public view returns (uint256 balance);
-    function ownerOf(uint256 _tokenId) external view returns (address owner);
-    function approve(address _to, uint256 _tokenId) external;
-    function transfer(address _to, uint256 _tokenId) external;
-    function transferFrom(address _from, address _to, uint256 _tokenId) external;
+  contract ERC20Events {
+      event Approval(address indexed src, address indexed guy, uint wad);
+      event Transfer(address indexed src, address indexed dst, uint wad);
+  }
 
-    // Events
-    event Transfer(address from, address to, uint256 tokenId);
-    event Approval(address owner, address approved, uint256 tokenId);
+  contract ERC20 is ERC20Events {
+      function totalSupply() public view returns (uint);
+      function balanceOf(address guy) public view returns (uint);
+      function allowance(address src, address guy) public view returns (uint);
+
+      function approve(address guy, uint wad) public returns (bool);
+      function transfer(address dst, uint wad) public returns (bool);
+      function transferFrom(
+          address src, address dst, uint wad
+      ) public returns (bool);
   }
   ```
 
@@ -186,6 +189,8 @@
   ```
 
   And in your Ganache, navigate to `Blocks`, you could see over first block, there're `Contract Creation` as our SCC has been deployed successfully.
+
+  > Notes: Sometimes Truffle messed up with Ganache, so if you couldn't migrate your contract, try to restart Ganache
 
   #### 5. Testing the smart contract **[TODO]**
 

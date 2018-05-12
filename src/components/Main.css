@@ -1,0 +1,23 @@
+.col-usertab {
+  padding: 0px;
+  border: 1px solid #8EC0E4;
+  border-radius: 20px;
+  height: 100%;
+  color: white;
+  -webkit-box-shadow: 10px 10px 40px 8px rgba(179,165,179,0.6);
+  -moz-box-shadow: 10px 10px 40px 8px rgba(179,165,179,0.6);
+  box-shadow: 10px 10px 40px 8px rgba(179,165,179,0.6);
+}
+
+.col-servicelist {
+  max-height: 605px;
+  overflow-y: scroll;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.footer p {
+  font-size: 14px;
+}

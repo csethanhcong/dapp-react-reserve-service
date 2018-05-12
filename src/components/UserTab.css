@@ -1,0 +1,13 @@
+.row-usertab {
+  padding: 20px;
+}
+
+.btn-reload {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.icon-eth-balance {
+  width: 16px;
+}

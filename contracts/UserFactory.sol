@@ -1,4 +1,4 @@
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.21;
 
 contract UserFactory {
 
@@ -6,7 +6,7 @@ contract UserFactory {
         string userPhoneNo;
         string userName;
         string userAddress;
-        bool isGuest; // to check this user is guest or owner
+        bool isOwner; // to check this user is guest or owner
     }
 
     // Index owner'address for filter on web3 later
@@ -16,25 +16,44 @@ contract UserFactory {
         string userPhoneNo,
         string userName,
         string userAddress,
-        bool isGuest
+        bool isOwner
     );
 
     User[] public users;
 
+    mapping (address => bool) public addressToIsUser;
     mapping (address => uint) public addressToUserId;
 
     // ============= Modifiers ================
+    modifier onlyUser {
+        require(addressToIsUser[msg.sender]);
+        _;
+    }
+
+    modifier onlyOwnerUser {
+        require(addressToIsUser[msg.sender]);
+
+        uint userId = addressToUserId[msg.sender];
+        User memory currentUser = users[userId];
+        require(currentUser.isOwner);
+
+        _;
+    }
 
     // ============= Private / Internal functions ================
 
     // ============= Public / External functions ================
+
+    function isUser() public view returns (bool) {
+        return addressToIsUser[msg.sender];
+    }
 
     function getCurrentUserInfo() external view returns (
         uint userId,
         string userPhoneNo,
         string userName,
         string userAddress,
-        bool isGuest
+        bool isOwner
     ) {
         userId = addressToUserId[msg.sender];
         User memory currentUser = users[userId];
@@ -42,32 +61,33 @@ contract UserFactory {
         userPhoneNo = currentUser.userPhoneNo;
         userName = currentUser.userName;
         userAddress = currentUser.userAddress;
-        isGuest = currentUser.isGuest;
+        isOwner = currentUser.isOwner;
     }
 
     function createUser(
         string _userPhoneNo,
         string _userName,
         string _userAddress,
-        bool _isGuest
+        bool _isOwner
     ) external returns (uint userId) {
         User memory newUser = User({
             userPhoneNo: _userPhoneNo,
             userName: _userName,
             userAddress: _userAddress,
-            isGuest: _isGuest
+            isOwner: _isOwner
         });
 
         userId = users.push(newUser) - 1;
         addressToUserId[msg.sender] = userId;
+        addressToIsUser[msg.sender] = true;
 
-        NewUserCreated(
+        emit NewUserCreated(
             msg.sender,
             userId,
             _userPhoneNo,
             _userName,
             _userAddress,
-            _isGuest
+            _isOwner
         );
     }
 

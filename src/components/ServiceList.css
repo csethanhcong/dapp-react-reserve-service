@@ -1,0 +1,40 @@
+.service-placeholder {
+  width: 64px;
+  height: 64px;
+}
+
+.media-service-item {
+  border: 1px solid #8EC0E4;
+  border-radius: 20px;
+  padding: 10px;
+  width: 500px;
+  margin-bottom: 10px;
+  color: white;
+  -webkit-box-shadow: 10px 10px 20px 3px rgba(179,165,179,0.6);
+  -moz-box-shadow: 10px 10px 20px 3px rgba(179,165,179,0.6);
+  box-shadow: 10px 10px 20px 3px rgba(179,165,179,0.6);
+}
+
+.media-service-item .media-img {
+  padding-right: 10px;
+}
+
+.media-service-item .media-text {
+  margin-bottom: 5px;
+}
+
+.media-service-item .service-placeholder .mark {
+  color: black;
+}
+
+.btn-group-service {
+  margin-top: 20px;
+}
+
+.non-padding {
+  padding: 0 !important;
+}
+
+.icon-eth-balance {
+  width: 16px;
+}
