@@ -44,6 +44,7 @@ export default class ServiceList extends Component {
     // .on('error', console.error);
   }
 
+  // Tutorial: Step 6
   reserveServiceByETH = async (serviceId) => {
     const { serviceInstance, currentAccount, services, fetchServices, web3, setLoading } = this.props;
 
@@ -73,12 +74,13 @@ export default class ServiceList extends Component {
       await fetchServices(true);
 
       setLoading(false);
-      
+
     } else {
       console.log('> Error with reserveServiceByETH');
     }
   }
 
+  // Tutorial: Step 7
   reserveServiceByRESToken = async (serviceId) => {
     const { serviceInstance, currentAccount, services, fetchServices, web3, setLoading } = this.props;
 

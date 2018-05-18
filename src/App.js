@@ -16,7 +16,6 @@ import RegistrationForm from './components/RegistrationForm';
 import Main from './components/Main';
 
 import ServiceContractABI from '../build/contracts/ServiceFactory.json'
-import * as contract from 'truffle-contract'
 import getWeb3 from './utils/getWeb3'
 
 // import './css/oswald.css'
@@ -51,6 +50,7 @@ class App extends Component {
     this.instantiateContract = this.instantiateContract.bind(this);
   }
 
+  // Tutorial: Step 1.2
   componentDidMount() {
 
     const { currentAccount } = this.state;
@@ -67,35 +67,13 @@ class App extends Component {
         }
       });
     }, 1000);
-
-    // this.ServiceContract.deployed().then(function(instance) {
-    // }).then(function(result) {
-    //    result is an object with the following values:
-    //
-    //    result.tx      => transaction hash, string
-    //    result.logs    => array of decoded events that were triggered within this transaction
-    //    result.receipt => transaction receipt object, which includes gas used
-    //
-    //    We can loop through result.logs to see if we triggered the Transfer event.
-    //   for (var i = 0; i < result.logs.length; i++) {
-    //     var log = result.logs[i];
-    //
-    //     if (log.event === "NewPlayerCreated") {
-    //       console.log('> Event');
-    //       console.log(log);
-    //        We found the event!
-    //       break;
-    //     }
-    //   }
-    // }).catch(function(err) {
-    //    There was an error! Handle it.
-    // });
   }
 
   componentWillUnMount() {
     clearInterval(this.accountInterval);
   }
 
+  // Tutorial: Step 1.1
   componentWillMount() {
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
@@ -146,14 +124,8 @@ class App extends Component {
     })
   }
 
+  // Tutorial: Step 2
   instantiateContract() {
-    /*
-     * SMART CONTRACT EXAMPLE
-     *
-     * Normally these functions would be called in the context of a
-     * state management library, but for convenience I've placed them here.
-     */
-
     const self = this;
 
     // This address was created by truffle migrate deploy to Ganache
@@ -162,10 +134,10 @@ class App extends Component {
 
     // From Ropsten Testnet
     self.serviceInstance = new self.state.web3.eth.Contract(ServiceContractABI.abi, '0xa51d2752819112ec6151623ea515233234524dfa');
-    // this.serviceInstance = this.ServiceContract.at('0x30753e4a8aad7f8597332e813735def5dd395028');
 
     // Or use from Remix, that's also deploy to Ganache via Web3 Provider as our local node
     // this.serviceInstance = this.ServiceContract.at('0x8cdaf0cd259887258bc13a92c0a6da92698644c0');
+
     self.state.web3.eth.getAccounts((error, accounts) => {
       console.log(accounts);
       console.log(self.serviceInstance);

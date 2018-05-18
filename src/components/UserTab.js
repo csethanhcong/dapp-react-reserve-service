@@ -24,6 +24,7 @@ export default class UserTab extends Component {
     }
   }
 
+  // Tutorial: Step 5
   async componentWillMount() {
     await this.getCurrentUserInfo();
     await this.getBalanceInETH();

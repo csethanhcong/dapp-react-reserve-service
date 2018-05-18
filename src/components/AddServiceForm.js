@@ -44,6 +44,7 @@ export default class AddServiceForm extends Component {
     });
   }
 
+  // Tutorial: Step 4
   async submitAddServiceForm() {
     const { serviceInstance, currentAccount, toggle, fetchServices, setLoading } = this.props;
     const { serviceName, serviceDescription, servicePrice, canPayByRESToken } = this.state;

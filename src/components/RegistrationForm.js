@@ -33,6 +33,7 @@ export default class RegistrationForm extends Component {
     });
   }
 
+  // Tutorial: Step 3
   submitRegisterationForm(e) {
     e.preventDefault();
 
@@ -53,7 +54,7 @@ export default class RegistrationForm extends Component {
     .send({from: currentAccount})
     .then(function(receipt){
       setLoading(false);
-      
+
       console.log(receipt);
 
       setIsUser();
